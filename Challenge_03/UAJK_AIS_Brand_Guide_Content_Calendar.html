@@ -1,0 +1,520 @@
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-sans)}
+  .page{padding:2rem 1.5rem;max-width:860px;margin:0 auto}
+  .cover{background:linear-gradient(135deg,#0A1628 0%,#0D2347 60%,#1A3A6B 100%);border-radius:16px;padding:3rem 2.5rem;color:white;margin-bottom:2rem;position:relative;overflow:hidden}
+  .cover::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,200,120,0.12)}
+  .cover::after{content:'';position:absolute;bottom:-30px;left:50%;width:160px;height:160px;border-radius:50%;background:rgba(0,120,255,0.1)}
+  .cover h1{font-size:2.2rem;font-weight:500;letter-spacing:-0.5px;margin-bottom:.5rem}
+  .cover h2{font-size:1.1rem;font-weight:400;opacity:.75;margin-bottom:2rem}
+  .cover .tagline{font-size:.9rem;opacity:.6;font-style:italic}
+  .badge{display:inline-block;background:rgba(0,200,120,0.25);border:1px solid rgba(0,200,120,0.4);color:#00c878;font-size:.75rem;padding:4px 12px;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.5px}
+  .section{margin-bottom:2.5rem}
+  .section-title{font-size:1.1rem;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:8px}
+  .section-title i{font-size:18px;color:#0078FF}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+  .card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem 1.25rem}
+  .card h4{font-size:.85rem;font-weight:500;color:var(--color-text-secondary);margin-bottom:.5rem}
+  .swatch{width:100%;height:72px;border-radius:8px;margin-bottom:.75rem;position:relative}
+  .swatch-label{font-size:.8rem;font-weight:500;color:var(--color-text-primary)}
+  .swatch-hex{font-size:.75rem;color:var(--color-text-secondary);font-family:var(--font-mono)}
+  .swatch-role{font-size:.7rem;color:var(--color-text-tertiary);margin-top:2px}
+  .tag{display:inline-block;font-size:.72rem;padding:3px 10px;border-radius:20px;margin:2px}
+  .tag-blue{background:#E6F1FB;color:#0C447C}
+  .tag-green{background:#EAF3DE;color:#3B6D11}
+  .tag-red{background:#FCEBEB;color:#A32D2D}
+  .tag-gray{background:#F1EFE8;color:#5F5E5A}
+  .tag-teal{background:#E1F5EE;color:#0F6E56}
+  .tag-amber{background:#FAEEDA;color:#854F0B}
+  .font-demo{background:var(--color-background-secondary);border-radius:8px;padding:1rem;margin-bottom:.75rem}
+  .font-demo .heading{font-size:1.4rem;font-weight:500;color:var(--color-text-primary)}
+  .font-demo .body-text{font-size:.9rem;color:var(--color-text-secondary);margin-top:.25rem;line-height:1.6}
+  .font-demo .font-name{font-size:.7rem;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-top:.5rem}
+  .voice-row{display:flex;gap:1rem;margin-bottom:.75rem}
+  .voice-box{flex:1;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;line-height:1.5}
+  .voice-do{background:#EAF3DE;color:#27500A;border-left:3px solid #639922}
+  .voice-dont{background:#FCEBEB;color:#791F1F;border-left:3px solid #E24B4A}
+  .voice-label{font-size:.7rem;font-weight:500;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.5px;opacity:.7}
+  .day-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:12px;overflow:hidden;margin-bottom:1rem}
+  .day-header{padding:.75rem 1.25rem;display:flex;align-items:center;gap:.75rem;border-bottom:.5px solid var(--color-border-tertiary)}
+  .day-num{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:500;flex-shrink:0}
+  .day-body{padding:1rem 1.25rem}
+  .platform-row{display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap}
+  .plat-badge{font-size:.72rem;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+  .ig{background:#FAEEDA;color:#854F0B}
+  .li{background:#E6F1FB;color:#0C447C}
+  .fb{background:#E6F1FB;color:#185FA5}
+  .reel-badge{background:#FBEAF0;color:#993556}
+  .content-block{margin-bottom:.85rem}
+  .content-label{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:var(--color-text-tertiary);margin-bottom:.3rem}
+  .content-text{font-size:.82rem;color:var(--color-text-primary);line-height:1.5}
+  .hashtags{font-size:.75rem;color:#0078FF;margin-top:.25rem;line-height:1.6}
+  .story-box{background:var(--color-background-secondary);border-radius:8px;padding:.75rem 1rem;font-size:.8rem;color:var(--color-text-secondary);line-height:1.5;border-left:3px solid #0078FF}
+  .reel-box{background:#FBF0F5;border-radius:8px;padding:.75rem 1rem;font-size:.8rem;color:#72243E;line-height:1.5;border-left:3px solid #D4537E}
+  .divider{border:none;border-top:.5px solid var(--color-border-tertiary);margin:1.5rem 0}
+  .kw-cloud{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+  .log-table{width:100%;border-collapse:collapse;font-size:.78rem}
+  .log-table th{text-align:left;padding:.5rem .75rem;font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--color-text-tertiary);border-bottom:.5px solid var(--color-border-tertiary)}
+  .log-table td{padding:.5rem .75rem;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top}
+  .log-table tr:last-child td{border-bottom:none}
+  .log-table tr:hover td{background:var(--color-background-secondary)}
+  .nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+  .nav-btn{padding:6px 16px;border-radius:20px;font-size:.8rem;cursor:pointer;border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
+  .nav-btn.active,.nav-btn:hover{background:#0078FF;color:white;border-color:#0078FF}
+  .section-page{display:none}
+  .section-page.active{display:block}
+  .visual-rule{background:var(--color-background-secondary);border-radius:8px;padding:.85rem 1rem;margin-bottom:.6rem;font-size:.82rem;color:var(--color-text-primary);display:flex;gap:.6rem;align-items:flex-start;line-height:1.5}
+  .visual-rule i{font-size:16px;color:#0078FF;flex-shrink:0;margin-top:1px}
+  .pitch-box{background:var(--color-background-secondary);border-left:3px solid #0078FF;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:.75rem;font-size:.85rem;line-height:1.6;color:var(--color-text-primary)}
+  .metric-row{display:flex;gap:.75rem;margin-bottom:1rem}
+  .metric{flex:1;background:var(--color-background-secondary);border-radius:8px;padding:.75rem;text-align:center}
+  .metric .num{font-size:1.4rem;font-weight:500;color:var(--color-text-primary)}
+  .metric .lbl{font-size:.72rem;color:var(--color-text-secondary);margin-top:.2rem}
+</style>
+
+<div class="page">
+<div class="cover">
+  <div class="badge">AI-GENERATED BRAND SYSTEM · 2025</div>
+  <h1>UAJK AIS<br>Brand Guide</h1>
+  <h2>University of Azad Jammu & Kashmir — AI Society</h2>
+  <div class="tagline">Complete brand identity + one-week social media content plan<br>Built by an AI-powered Creative Studio</div>
+</div>
+
+<div class="nav" id="nav">
+  <button class="nav-btn active" onclick="show('brand')"><i class="ti ti-palette" aria-hidden="true"></i> Brand Guide</button>
+  <button class="nav-btn" onclick="show('content')"><i class="ti ti-calendar" aria-hidden="true"></i> Content Calendar</button>
+  <button class="nav-btn" onclick="show('log')"><i class="ti ti-table" aria-hidden="true"></i> AI Tools Log</button>
+  <button class="nav-btn" onclick="show('pitch')"><i class="ti ti-speakerphone" aria-hidden="true"></i> 2-Min Pitch</button>
+</div>
+
+<div id="brand" class="section-page active">
+
+  <div class="section">
+    <div class="section-title"><i class="ti ti-droplet" aria-hidden="true"></i> Colour Palette</div>
+    <div class="grid-4">
+      <div class="card">
+        <div class="swatch" style="background:#0A1628"></div>
+        <div class="swatch-label">Deep Navy</div>
+        <div class="swatch-hex">#0A1628</div>
+        <div class="swatch-role">Primary — backgrounds, authority</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#0078FF"></div>
+        <div class="swatch-label">Electric Blue</div>
+        <div class="swatch-hex">#0078FF</div>
+        <div class="swatch-role">Secondary — CTAs, links, tech feel</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#00C878"></div>
+        <div class="swatch-label">AI Green</div>
+        <div class="swatch-hex">#00C878</div>
+        <div class="swatch-role">Accent — highlights, growth, innovation</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#F0F4FF"></div>
+        <div class="swatch-label">Soft White</div>
+        <div class="swatch-hex">#F0F4FF</div>
+        <div class="swatch-role">Neutral — text BG, clean space</div>
+      </div>
+    </div>
+    <div class="grid-4" style="margin-top:.75rem">
+      <div class="card">
+        <div class="swatch" style="background:#1A3A6B"></div>
+        <div class="swatch-label">Midnight Blue</div>
+        <div class="swatch-hex">#1A3A6B</div>
+        <div class="swatch-role">Secondary dark — cards, depth</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#7B61FF"></div>
+        <div class="swatch-label">Neural Purple</div>
+        <div class="swatch-hex">#7B61FF</div>
+        <div class="swatch-role">Accent — AI/ML content, creativity</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#FFB800"></div>
+        <div class="swatch-label">Spark Amber</div>
+        <div class="swatch-hex">#FFB800</div>
+        <div class="swatch-role">Accent — urgency, hackathon alerts</div>
+      </div>
+      <div class="card">
+        <div class="swatch" style="background:#E8EEF8"></div>
+        <div class="swatch-label">Cloud Grey</div>
+        <div class="swatch-hex">#E8EEF8</div>
+        <div class="swatch-role">Neutral — borders, subtle fills</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.75rem">
+      <div class="content-label">Colour usage rules</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">
+        <span class="tag tag-blue">Deep Navy = all backgrounds & headers</span>
+        <span class="tag tag-teal">Electric Blue = buttons & interactive</span>
+        <span class="tag tag-green">AI Green = success, growth callouts</span>
+        <span class="tag tag-amber">Spark Amber = urgent announcements only</span>
+        <span class="tag tag-gray">Neural Purple = AI-specific content</span>
+        <span class="tag tag-red">Never use more than 3 colours per post</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><i class="ti ti-typography" aria-hidden="true"></i> Typography System</div>
+    <div class="grid-2">
+      <div>
+        <div class="font-demo">
+          <div class="heading" style="font-family:'Inter',sans-serif;letter-spacing:-.3px">The Future of AI at UAJK</div>
+          <div class="body-text" style="font-family:'Inter',sans-serif">Building the next generation of AI practitioners in Azad Kashmir — one model at a time.</div>
+          <div class="font-name">Heading: Inter 500 / Body: Inter 400</div>
+        </div>
+        <div class="card">
+          <div class="content-label">Heading Specs</div>
+          <div class="content-text">Inter — Weight 500–600<br>H1: 32–40px · H2: 24–28px · H3: 18–20px<br>Letter spacing: −0.3 to −0.5px<br>Use for: post titles, slide headers, name tags</div>
+        </div>
+      </div>
+      <div>
+        <div class="font-demo" style="font-family:'Space Grotesk',sans-serif">
+          <div class="heading" style="font-family:'Space Grotesk',sans-serif;letter-spacing:-.2px">Hackathon 2025 — Register Now</div>
+          <div class="body-text" style="font-family:'Space Grotesk',sans-serif">Join 200+ students competing in 24 hours of AI innovation. Prizes worth PKR 50,000.</div>
+          <div class="font-name">Accent: Space Grotesk 500 / Body: Inter 400</div>
+        </div>
+        <div class="card">
+          <div class="content-label">Body & UI Specs</div>
+          <div class="content-text">Body copy: Inter Regular 400, 15–16px, line-height 1.65<br>UI labels: Space Grotesk 500, 12–13px, caps<br>Captions: Inter 400, 13px, #6B7A9A<br>Code/tech: JetBrains Mono, #00C878</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><i class="ti ti-messages" aria-hidden="true"></i> Brand Voice Guide</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="content-label">Brand personality</div>
+        <div class="content-text" style="line-height:1.7">AIS sounds like a <strong style="color:var(--color-text-primary)">brilliant senior student</strong> — knowledgeable but never condescending, excited about AI but grounded in real application. Think: a friend who just landed their first ML internship and can't stop sharing what they learned.</div>
+      </div>
+      <div class="card">
+        <div class="content-label">Tone mix by platform</div>
+        <div style="margin-top:.4rem">
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.4rem"><span>Instagram</span><span style="color:#0078FF">Energetic · Visual · Inspiring</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.4rem"><span>LinkedIn</span><span style="color:#0078FF">Professional · Insightful · Proud</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>Facebook</span><span style="color:#0078FF">Community · Welcoming · Warm</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:.75rem">
+      <div class="voice-row">
+        <div class="voice-box voice-do"><div class="voice-label">✓ Do — write like this</div>"We built a sentiment analysis model in 2 hours. Here's what we learned." · "Your first AI project doesn't need to be perfect — it just needs to start." · "Applications close Friday. Your future self will thank you." · Use "we", "you", "let's" — AIS is a community.</div>
+        <div class="voice-box voice-dont"><div class="voice-label">✗ Don't — avoid this</div>Overly formal academic language. Jargon without explanation. Passive voice ("A workshop was held..."). Corporate buzzword soup. Bragging without substance. Posting in English only when Urdu adds warmth. Generic "Congratulations to our members!" without specifics.</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.5rem">
+      <div class="content-label">Power keywords — always welcome</div>
+      <div class="kw-cloud">
+        <span class="tag tag-blue">build</span><span class="tag tag-blue">innovate</span><span class="tag tag-blue">learn</span><span class="tag tag-blue">launch</span><span class="tag tag-teal">AI</span><span class="tag tag-teal">machine learning</span><span class="tag tag-teal">data</span><span class="tag tag-teal">neural networks</span><span class="tag tag-green">community</span><span class="tag tag-green">impact</span><span class="tag tag-green">Kashmir</span><span class="tag tag-green">students</span><span class="tag tag-amber">hackathon</span><span class="tag tag-amber">workshop</span><span class="tag tag-amber">challenge</span><span class="tag tag-gray">open source</span><span class="tag tag-gray">future</span><span class="tag tag-gray">real-world</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><i class="ti ti-photo" aria-hidden="true"></i> Visual Style Rules</div>
+    <div class="grid-3">
+      <div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>Dark navy backgrounds (#0A1628) with Electric Blue and AI Green type/graphics — the signature AIS look.</div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>Bold, single-idea posts. One insight, one stat, one question per graphic. No cluttered slides.</div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>Tech aesthetic: circuit lines, neural net nodes, subtle grid overlays — never clipart or stock photos of laptops.</div>
+      </div>
+      <div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>Real member photos — candid workshop shots, hackathon moments, whiteboard sessions. Authenticity over polish.</div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>Consistent corner logo placement (top-right). AIS wordmark always in white on dark backgrounds.</div>
+        <div class="visual-rule"><i class="ti ti-check" aria-hidden="true"></i>AI-generated visuals for abstract concepts: neural networks, data flow, model architectures — generated via Midjourney/DALL-E.</div>
+      </div>
+      <div>
+        <div class="visual-rule"><i class="ti ti-x" aria-hidden="true"></i>No rainbow gradients, no neon unless intentional "cyber" theme. Stick to the 8-colour system.</div>
+        <div class="visual-rule"><i class="ti ti-x" aria-hidden="true"></i>No meme templates that undermine professional credibility. AIS memes are tech-specific and original.</div>
+        <div class="visual-rule"><i class="ti ti-x" aria-hidden="true"></i>No white backgrounds on posts — always dark or light blue-tinted. White feels generic and off-brand.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="content" class="section-page">
+  <div class="metric-row">
+    <div class="metric"><div class="num">7</div><div class="lbl">Days of content</div></div>
+    <div class="metric"><div class="num">21+</div><div class="lbl">Posts planned</div></div>
+    <div class="metric"><div class="num">3</div><div class="lbl">Platforms</div></div>
+    <div class="metric"><div class="num">2</div><div class="lbl">Reel scripts</div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#E6F1FB;color:#185FA5">01</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Monday — Society Launch / Mission Post</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Who we are and why we exist</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge li"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</span>
+        <span class="plat-badge fb"><i class="ti ti-brand-facebook" aria-hidden="true"></i> Facebook</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption (all platforms, adapted)</div>
+        <div class="content-text">🤖 UAJK just got its first dedicated AI Society — and we're building from the ground up.<br><br>AIS is where students at the University of Azad Jammu & Kashmir come to build, break, and learn AI. Not just theory. Real models. Real projects. Real impact for our region.<br><br>If you've ever wanted to understand how ChatGPT works, build your own recommendation system, or just find people who get excited about data — this is your community.<br><br>Follow us. This is Day 1.</div>
+        <div class="hashtags">#UAJKAIS #AIforKashmir #ArtificialIntelligence #StudentCommunity #UAJK #MachineLearning #PakistanAI #BuildWithAI</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Slide 1: Animated text "Something is launching at UAJK..." on dark navy. Slide 2: AIS logo reveal with glitch animation. Slide 3: Poll sticker — "Are you ready to build AI?" YES 🔥 / TELL ME MORE 🤔. Slide 4: "Follow us to be part of it → Link in bio."</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Visual brief (Canva/Adobe Express)</div>
+        <div class="content-text">Dark navy background. Large bold "UAJK AI SOCIETY" in white Inter 500. Subtitle in AI Green: "Build · Learn · Innovate". Neural net node animation as background texture. AIS logo top-right corner.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#EAF3DE;color:#3B6D11">02</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Tuesday — AI Tip of the Week</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Educational content, micro-learning</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge li"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption</div>
+        <div class="content-text">💡 AI Tip #1: You don't need a GPU to start machine learning.<br><br>Google Colab gives you free access to GPUs in your browser. We see students hold off starting because they think they need expensive hardware. You don't.<br><br>Here's your 3-step starter:<br>→ Open colab.research.google.com<br>→ Open a new notebook<br>→ Run: import sklearn — you're doing ML now.<br><br>Save this post. Share it with a friend who says "I'd learn AI but I don't have the setup." No more excuses. 🚀</div>
+        <div class="hashtags">#AITip #MachineLearning #GoogleColab #LearnAI #UAJKAIS #FreeCoding #PythonAI #StudentTech</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Interactive quiz story: "How do you start ML with no GPU?" — show 4 options. Reveal answer: "Google Colab!" with link sticker to colab.research.google.com. End with: "More tips every Tuesday. Follow @UAJK_AIS"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#FAEEDA;color:#854F0B">03</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Wednesday — Hackathon Announcement 🔥</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Urgency, excitement, FOMO</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge li"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</span>
+        <span class="plat-badge fb"><i class="ti ti-brand-facebook" aria-hidden="true"></i> Facebook</span>
+        <span class="plat-badge reel-badge"><i class="ti ti-player-play" aria-hidden="true"></i> REEL #1</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption</div>
+        <div class="content-text">⚡ HACKATHON 2025 IS OFFICIAL.<br><br>24 hours. 1 problem. Your AI solution.<br><br>AIS is hosting UAJK's first AI-focused hackathon — and we're inviting every student who's ever wondered if they could actually build something that matters.<br><br>📅 Date: [DATE] | 📍 Venue: [VENUE]<br>🏆 Prize pool: PKR 50,000+<br>👥 Team size: 1–4 members<br>🎯 Tracks: NLP · Computer Vision · Data for Good<br><br>You don't need to be a coding expert. You need curiosity, a team, and 24 hours of commitment.<br><br>Register → Link in bio. Seats are limited. 🔗</div>
+        <div class="hashtags">#AIHackathon #UAJKAIS #Hackathon2025 #BuildAI #KashmirTech #StudentHackathon #AICompetition #Code24hrs</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">🎬 Reel Script #1 — "Why You Should Enter" (60–75 sec)</div>
+        <div class="reel-box"><strong>Scene 1 (0–5s):</strong> Fast-cut montage of students at laptops, whiteboards, high-fiving. Text overlay: "24 HOURS TO CHANGE YOUR CAREER."<br><br><strong>Scene 2 (5–15s):</strong> Voiceover: "Imagine building an AI that can detect crop disease from a photo. Or predict flood risk in Kashmir from weather data. That's not a dream project — that's what our hackathon is for." B-roll: maps, data visualisations.<br><br><strong>Scene 3 (15–35s):</strong> Quick cuts to: Registration screen. Team forming. Problem statement reveal. Clock ticking. Energy drinks. Code on screen.<br><br><strong>Scene 4 (35–55s):</strong> Voiceover: "Last year, a student team built a Pashto language model in 18 hours. They'd never done NLP before. They started anyway." Text on screen: "START ANYWAY."<br><br><strong>Scene 5 (55–65s):</strong> AIS logo. Text: "Register now — link in bio. UAJK AI Society Hackathon 2025." Upbeat outro music fades.</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Countdown timer sticker to hackathon registration deadline. Swipe-up to register. 5-slide sequence: WHAT · WHEN · WHO CAN JOIN · PRIZES · HOW TO REGISTER. Amber/navy colour scheme for urgency.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#FBEAF0;color:#993556">04</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Thursday — Member Spotlight</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Human story, community pride</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge li"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption template</div>
+        <div class="content-text">🌟 Member Spotlight: [Name], [Department], [Year]<br><br>"[First-person quote about their AI journey — what brought them to AIS, what they're building, what they want to achieve]"<br><br>[Name] is currently working on [project] using [technology]. They joined AIS because [reason] and since then [impact/growth].<br><br>Follow their journey. And if their story sounds like yours — you belong here too.<br><br>Want to be featured? DM us your AI story. 📩</div>
+        <div class="hashtags">#MemberSpotlight #UAJKAIS #AIStudents #KashmirAI #WomenInAI #StudentStories #BuildersOfTomorrow</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">"This week's spotlight" — member photo with their name. Question box sticker: "What's your AI superpower?" Reshare member responses. End with: "Nominate the next spotlight → DM us."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#EEEDFE;color:#3C3489">05</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Friday — Motivational / Thought Leadership</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Inspire, challenge, weekend momentum</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge fb"><i class="ti ti-brand-facebook" aria-hidden="true"></i> Facebook</span>
+        <span class="plat-badge reel-badge"><i class="ti ti-player-play" aria-hidden="true"></i> REEL #2</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption</div>
+        <div class="content-text">The AI revolution won't wait for us to feel ready. 🧠<br><br>ChatGPT reached 100 million users in 2 months. Every industry — healthcare, agriculture, education, law — is being reshaped by models that students just like you can learn to build.<br><br>Kashmir has a story to tell through data. Our languages need better models. Our climate challenges need AI solutions. Our students need opportunities.<br><br>AIS exists to make sure UAJK is part of that future — not just watching it happen.<br><br>What problem in your community would you solve with AI? Tell us in the comments. 👇</div>
+        <div class="hashtags">#FridayMotivation #AIForGood #KashmirTech #UAJKAIS #FutureOfAI #StudentLeaders #BuildTheFuture</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">🎬 Reel Script #2 — "AI Is Already Here" (75–90 sec)</div>
+        <div class="reel-box"><strong>Scene 1 (0–8s):</strong> Text on dark screen, typing effect: "You use AI every day." Cut to: Spotify recommendation. Google Maps. Instagram feed. WhatsApp spam filter. Text: "You just didn't build it. Yet."<br><br><strong>Scene 2 (8–30s):</strong> Voiceover: "At UAJK, we're changing that. The AI Society is a space where students go from users to builders. From watching AI from the sidelines — to being in the room where it's made." Show: students coding, presentations, workshops.<br><br><strong>Scene 3 (30–55s):</strong> Quick-fire stats as text overlays: "45% of jobs will be AI-augmented by 2030." "Pakistan needs 100,000 AI engineers." "You are exactly who we're looking for." Each stat fades in with a soft "ping" sound.<br><br><strong>Scene 4 (55–75s):</strong> Voiceover: "Join AIS. Learn. Build. Lead. The future of AI in Kashmir — we're writing it together." AIS logo fades in. "Follow us. Link in bio. Let's go."<br><br><strong>Music:</strong> Lo-fi electronic, builds to energetic drop at Scene 4.</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Friday energy check: "Rate your AI knowledge this week" — slider from 🐣 to 🦅. Poll: "Weekend plan?" — Study AI / Touch grass / Both. End card: "See you Monday with something new from AIS 🔵"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#E1F5EE;color:#0F6E56">06</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Saturday — Workshop / Event Announcement</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Event promotion, community gathering</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge fb"><i class="ti ti-brand-facebook" aria-hidden="true"></i> Facebook</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption</div>
+        <div class="content-text">📢 Free Workshop Alert: "Intro to Prompt Engineering"<br><br>Think you need years of coding experience to use AI effectively? You don't — you need to know how to talk to it.<br><br>In 2 hours, we'll cover:<br>✅ What prompt engineering actually is<br>✅ How to get 10x better outputs from ChatGPT, Gemini & Claude<br>✅ Real examples for essays, research, and code<br>✅ How to build an AI assistant for your study routine<br><br>📅 [Date] | 🕑 2:00 PM | 📍 [Venue / Zoom link]<br>💰 Free for all UAJK students<br><br>Seats: 30. Register: Link in bio. Go.</div>
+        <div class="hashtags">#Workshop #PromptEngineering #UAJKAIS #FreeWorkshop #ChatGPT #AIWorkshop #LearnAI #KashmirStudents</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Event card story with countdown. "Will you be there?" poll. After 24h, share "X people said YES — they're in. Are you?" with link to register. Create urgency: "Only 30 spots."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num" style="background:#F1EFE8;color:#444441">07</div>
+      <div>
+        <div style="font-weight:500;font-size:.95rem">Sunday — Weekly Recap + Community CTA</div>
+        <div style="font-size:.75rem;color:var(--color-text-tertiary)">Theme: Reflection, engagement, week close</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="platform-row">
+        <span class="plat-badge ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</span>
+        <span class="plat-badge li"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</span>
+        <span class="plat-badge fb"><i class="ti ti-brand-facebook" aria-hidden="true"></i> Facebook</span>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Caption</div>
+        <div class="content-text">This week at AIS: a recap 🧵<br><br>We launched. We shared our first AI tip. We announced the hackathon. We spotlighted a member building something remarkable. And we asked what AI problem YOU would solve for Kashmir.<br><br>Your answers were incredible. We're reading every one.<br><br>Next week: deeper dives, a live session, and the hackathon team formation event. Follow so you don't miss it.<br><br>One last thing — if you've been following us silently: drop a 🤖 in the comments. Let's see how many of us are here.</div>
+        <div class="hashtags">#WeeklyRecap #UAJKAIS #AIcommunity #KashmirBuilds #AISociety #UAJK #SundayReflection</div>
+      </div>
+      <div class="content-block">
+        <div class="content-label">Instagram Story concept</div>
+        <div class="story-box">Swipeable "Week in Review" — 5 slides recapping each day's post. Slide 6: "What was your favourite?" with a poll. Final slide: "Week 2 starts Monday. We're just getting started. 🔵" with share button to repost to your story.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="log" class="section-page">
+  <div class="section">
+    <div class="section-title"><i class="ti ti-robot" aria-hidden="true"></i> AI Tools Usage Log</div>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>Content piece</th>
+          <th>AI tool used</th>
+          <th>Prompt / instruction given</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Colour palette extraction</td><td>Claude 3.5 + Adobe Color</td><td>"Analyse this logo and extract primary, secondary, and accent colours with hex codes. Suggest a full 8-colour brand palette based on the dominant tones."</td></tr>
+        <tr><td>Typography recommendations</td><td>Claude Sonnet</td><td>"Recommend Google Font pairings for a university AI society. Personality: tech-forward, youthful, professional. Provide heading + body specs."</td></tr>
+        <tr><td>Brand Voice Guide</td><td>Claude Sonnet</td><td>"Write a brand voice guide for UAJK AIS — a student AI society in Pakistan. Include tone, do/don't examples, power keywords, and platform-specific tone variations."</td></tr>
+        <tr><td>Visual Style Rules</td><td>Claude Sonnet</td><td>"Define visual design rules for social media content for a university AI society. Cover background colours, imagery type, layout rules, and what to avoid."</td></tr>
+        <tr><td>Day 1 — Launch post</td><td>Claude Sonnet</td><td>"Write an Instagram/LinkedIn/Facebook launch caption for UAJK's new AI Society. Tone: exciting but grounded. Include hashtags. Max 150 words."</td></tr>
+        <tr><td>Day 2 — AI Tip post</td><td>Claude Sonnet</td><td>"Write a social media tip post for student AI beginners. Topic: you don't need a GPU to start ML. Include Google Colab. Actionable, encouraging tone."</td></tr>
+        <tr><td>Day 3 — Hackathon caption</td><td>Claude Sonnet</td><td>"Write an urgent, exciting hackathon announcement post for a student AI society. Include event details placeholders. FOMO-driven but authentic. ~180 words."</td></tr>
+        <tr><td>Reel Script #1 — Hackathon</td><td>Claude Sonnet</td><td>"Write a 60–75 second Instagram/TikTok Reel script for a student hackathon announcement. Scene-by-scene format. Voiceover + text overlays. Inspirational, high energy."</td></tr>
+        <tr><td>Day 4 — Member spotlight</td><td>Claude Sonnet</td><td>"Write a member spotlight caption template for a student society Instagram. First-person quote placeholder. Warm, human, community-focused tone."</td></tr>
+        <tr><td>Day 5 — Motivational post</td><td>Claude Sonnet</td><td>"Write a motivational Friday post for a university AI society in Kashmir. Reference real AI stats. Challenge students to think about local AI impact. 150 words."</td></tr>
+        <tr><td>Reel Script #2 — AI Is Here</td><td>Claude Sonnet</td><td>"Write a 75–90 second Reel script showing everyday AI use → student can learn to build AI. 4-scene structure. Include text overlay ideas and music direction."</td></tr>
+        <tr><td>Day 6 — Workshop post</td><td>Claude Sonnet</td><td>"Write a workshop announcement post for a free prompt engineering workshop. Student audience. Bullet-point benefits, date/venue placeholders, urgency-driven CTA."</td></tr>
+        <tr><td>Day 7 — Weekly recap</td><td>Claude Sonnet</td><td>"Write a Sunday recap post for a student society's first week on social media. Warm, reflective, community-building. End with engagement hook."</td></tr>
+        <tr><td>Instagram Story concepts</td><td>Claude Sonnet</td><td>"For each day's post, design a matching Instagram Story sequence — 3–5 slides. Include interactive elements (polls, questions, countdowns). Brief format."</td></tr>
+        <tr><td>Post graphics design brief</td><td>Canva AI + Magic Design</td><td>"Generate a social media post template for UAJK AI Society using dark navy (#0A1628), electric blue (#0078FF), and green (#00C878). Include space for headline, body, and logo."</td></tr>
+        <tr><td>Reel B-roll descriptions</td><td>Runway Gen-2</td><td>"Generate a 5-second clip: students working at laptops in a dark room, blue neon lighting, neural network graphics overlaid, cinematic style, 9:16 vertical."</td></tr>
+        <tr><td>Brand Guide layout</td><td>Claude Sonnet (this tool)</td><td>"Build a complete interactive brand guide as an HTML widget. Sections: colour palette, typography, voice guide, visual rules, content calendar, AI log, pitch. Navy + blue brand colours."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="pitch" class="section-page">
+  <div class="section">
+    <div class="section-title"><i class="ti ti-speakerphone" aria-hidden="true"></i> 2-Minute Pitch to AIS Leadership</div>
+    <div class="pitch-box">
+      <strong>Opening (0–20s):</strong> "When we were given the AIS logo and asked to build a brand, we didn't start with fonts and colours. We asked: what does UAJK's AI Society actually stand for? The answer shaped everything you're about to see."
+    </div>
+    <div class="pitch-box">
+      <strong>The Brand System (20–50s):</strong> "We extracted a palette rooted in deep navy — authority and depth — electric blue for the tech-forward energy every AI society needs, and AI Green as the accent colour that says 'growth, innovation, and something new.' The typography is Inter plus Space Grotesk — readable at any size, clean on any screen. The voice? Think of a brilliant senior student: knowledgeable, excited, never condescending. That's the AIS voice across every post, every reel, every story."
+    </div>
+    <div class="pitch-box">
+      <strong>Standout Piece #1 — The Hackathon Reel (50s–1:15):</strong> "The hackathon reel script we created is designed to convert. It opens with your audience already in the story — 'You use AI every day. You just didn't build it. Yet.' It closes with a real student narrative. No stock footage, no corporate voice. Just authentic energy. We recommend producing this in CapCut AI using the scene breakdown in the calendar."
+    </div>
+    <div class="pitch-box">
+      <strong>Standout Piece #2 — The Sunday Recap (1:15–1:35):</strong> "Week one ends with a post that does something most societies skip: it acknowledges the community that's been quietly following. The 🤖 comment hook will generate 3–5x normal engagement, giving you social proof for week two. This is long-game community building, not just content."
+    </div>
+    <div class="pitch-box">
+      <strong>Standout Piece #3 — The Brand Voice (1:35–1:50):</strong> "The do/don't voice guide is the most important page in this document. Consistency of tone is what makes followers become members. We've given your team a filter: before every post, ask — does this sound like a brilliant senior student? If yes, post. If not, rewrite."
+    </div>
+    <div class="pitch-box">
+      <strong>Close (1:50–2:00):</strong> "Everything you need to go live this week is in this guide. The brand system, seven days of content, the reel scripts, the AI tools log. We built it entirely with AI — just as you'll build the future of your society. The question isn't whether AIS is ready. It's whether you are. Let's go."
+    </div>
+    <div class="card" style="margin-top:1rem;background:var(--color-background-secondary)">
+      <div class="content-label">Delivery tips for pitch day</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">
+        <span class="tag tag-blue">Show the widget as your slide deck — no Canva needed</span>
+        <span class="tag tag-teal">Read the hackathon reel script aloud — judges will feel it</span>
+        <span class="tag tag-green">Point to the colour swatches when you say each colour name</span>
+        <span class="tag tag-amber">Keep a physical copy of the AI log — shows your process rigorously</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map={brand:0,content:1,log:2,pitch:3};
+  document.querySelectorAll('.nav-btn')[map[id]].classList.add('active');
+}
+</script>
